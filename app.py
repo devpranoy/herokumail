@@ -1,5 +1,7 @@
 from flask import Flask ,render_template, flash, redirect, url_for, session, request, logging
 
+app = Flask(__name__)
+
 @app.route('/', methods=['GET','POST'])
 def index():
 	if request.method == 'POST':
