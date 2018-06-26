@@ -10,7 +10,7 @@ def index():
 		subject= request.form['subject']
 		message = request.form['message']
 		return message
-	return 200
+	return "200"
 
 if __name__=='__main__':
 	app.secret_key='secret123' #for flash messaging
