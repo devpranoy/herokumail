@@ -9,7 +9,8 @@ def index():
 		email = request.form['email']					#GET FORM FIELDS
 		subject= request.form['subject']
 		message = request.form['message']
-	return name,email,subject,message
+		return message
+	return 200
 
 if __name__=='__main__':
 	app.secret_key='secret123' #for flash messaging
