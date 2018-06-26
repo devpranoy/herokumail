@@ -27,7 +27,6 @@ def send():
 		s.ehlo()
 		s.login(me, cipher)
 		s.sendmail(me, recipients, msg.as_string())
-		print "Email sent to: " + ', '.join(recipients)
 		s.quit()
 		return"200 Success"
 	return "200"
