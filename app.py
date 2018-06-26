@@ -2,15 +2,20 @@ from flask import Flask ,render_template, flash, redirect, url_for, session, req
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET','POST'])
-def index():
+@app.route('/send', methods=['GET','POST'])
+def send():
 	if request.method == 'POST':
 		name=request.form['name']
 		email = request.form['email']					#GET FORM FIELDS
 		subject= request.form['subject']
 		message = request.form['message']
 		return message
+
+
+@app.route('/', methods=['GET','POST'])
+def index():
 	return "200"
+
 
 if __name__=='__main__':
 	app.secret_key='secret123' #for flash messaging
