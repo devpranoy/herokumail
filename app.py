@@ -17,23 +17,19 @@ def send():
 		p_reader = open('password.txt', 'rb') # edit for your password
 		cipher = p_reader.read()
 		recipients = ['sunil@alamrigroup.org','devpranoy@gmail.com'] # enter recipients here
-
-        #multipart class is for multiple recipients
-        msg = message
-        msg['Subject'] = Header('Message from alamrigroup.org website', 'utf-8')
-        msg['From'] = me
-        msg['To'] = ', '.join(recipients)
-
-        s = smtplib.SMTP(host='smtp.gmail.com', port=587)
-        s.ehlo()
-        s.starttls()
-        s.ehlo()
-        s.login(me, cipher)
-        s.sendmail(me, recipients, msg.as_string())
-
-        print "Email sent to: " + ', '.join(recipients)
-        s.quit()
-        return"200 Success"
+		msg = message
+		msg['Subject'] = Header('Message from alamrigroup.org website', 'utf-8')
+		msg['From'] = me
+		msg['To'] = ', '.join(recipients)
+		s = smtplib.SMTP(host='smtp.gmail.com', port=587)
+		s.ehlo()
+		s.starttls()
+		s.ehlo()
+		s.login(me, cipher)
+		s.sendmail(me, recipients, msg.as_string())
+		print "Email sent to: " + ', '.join(recipients)
+		s.quit()
+		return"200 Success"
 	return "200"
 
 @app.route('/', methods=['GET','POST'])
