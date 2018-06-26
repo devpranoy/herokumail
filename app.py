@@ -1,8 +1,8 @@
 from flask import Flask ,render_template, flash, redirect, url_for, session, request, logging
-import smtplib
-import time
-from email.Header import Header
-from email.mime.text import MIMEText
+import sendgrid
+import os
+from sendgrid.helpers.mail import *
+
 
 app = Flask(__name__)
 
@@ -13,21 +13,16 @@ def send():
 		email = request.form['email']					#GET FORM FIELDS
 		subject= request.form['subject']
 		message = request.form['message']
-		me = 'sunil@alamrigroup.org' # change to your email
-		p_reader = open('password.txt', 'rb') # edit for your password
-		cipher = p_reader.read()
-		recipients = ['sunil@alamrigroup.org','devpranoy@gmail.com'] # enter recipients here
-		msg = message
-		msg['Subject'] = Header('Message from alamrigroup.org website', 'utf-8')
-		msg['From'] = me
-		msg['To'] = ', '.join(recipients)
-		s = smtplib.SMTP(host='smtp.gmail.com', port=587)
-		s.ehlo()
-		s.starttls()
-		s.ehlo()
-		s.login(me, cipher)
-		s.sendmail(me, recipients, msg.as_string())
-		s.quit()
+		sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
+		from_email = Email("website@alamrigroup.org")
+		to_email = Email("devpranoy@gmail.com")
+		subject = "Sending with SendGrid is Fun"
+		content = Content("text/plain", "and easy to do anywhere, even with Python")
+		mail = Mail(from_email, subject, to_email, content)
+		response = sg.client.mail.send.post(request_body=mail.get())
+		print(response.status_code)
+		print(response.body)
+		print(response.headers)
 		return"200 Success"
 	return "200"
 
