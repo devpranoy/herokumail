@@ -17,7 +17,7 @@ def send():
 		from_email = Email("website@alamrigroup.org")
 		to_email = Email("sunil@alamrigroup.org")
 		subject = str(subject)
-		content = Content("text/plain", str(message)+"<br><br> Message by "+name+"<br><br> Email id "+email)
+		content = Content("text/plain", str(message)+"\n\n Message by "+name+"\n\n Email id "+email)
 		mail = Mail(from_email, subject, to_email, content)
 		response = sg.client.mail.send.post(request_body=mail.get())
 		print(response.status_code)
