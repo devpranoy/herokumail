@@ -14,10 +14,10 @@ def send():
 		subject= request.form['subject']
 		message = request.form['message']
 		sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
-		from_email = Email("sunil@alamrigroup.org")
-		to_email = Email("devpranoy@gmail.com")
+		from_email = Email("website@alamrigroup.org")
+		to_email = Email("sunil@alamrigroup.org")
 		subject = str(subject)
-		content = Content("text/plain", str(message)+" message by "+name+" Email :"+email)
+		content = Content("text/plain", str(message)+"<br> Message by "+name+"<br><br> Email :"+email)
 		mail = Mail(from_email, subject, to_email, content)
 		response = sg.client.mail.send.post(request_body=mail.get())
 		print(response.status_code)
