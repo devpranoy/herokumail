@@ -1,7 +1,7 @@
 Flask==0.12.2
 itsdangerous==0.24
 Jinja2==2.10
-gunicorn==19.3.0
+gunicorn==19.5.0
 MarkupSafe==0.23
 Werkzeug==0.10.1
 sendgrid==5.4.1
